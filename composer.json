@@ -1,0 +1,23 @@
+{
+    "name": "jasir/ra",
+    "description": "Alternative component helpers and DI for Nette Framework",
+
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "jasir",
+            "email": "sirjarda2@gmail.com"
+        }
+    ],
+    "require": {
+        "nette/nette": "^2.3"
+    },
+    "autoload": {
+        "classmap": ["src/"]
+    },
+    "require-dev": {
+        "jasir/testbase": "dev-master",
+        "janmarek/mockista": "dev-master",
+        "phpunit/phpunit": "^4.8"
+    }
+}

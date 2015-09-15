@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<phpunit backupGlobals="false" backupStaticAttributes="false" bootstrap="tests/bootstrap.php" convertErrorsToExceptions="true" convertNoticesToExceptions="true" convertWarningsToExceptions="true">
+  <testsuite>
+    <directory>tests/tests</directory>
+  </testsuite>
+</phpunit>
