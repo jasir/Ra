@@ -1,0 +1,12 @@
+<div class="ra-control ra-stub" style="background:#fcc !important;color:#444 !important; font-size: 9px;">
+    <strong>NO CONTROL</strong>
+
+    Component with name <code>{$control->name}</code> (full path: <code>{$control->getUniqueId()}</code>
+    has no factory defined.
+
+    {foreach $control->getComponents() as $component}
+        {control $component}
+    {/foreach}
+</div>
+
+

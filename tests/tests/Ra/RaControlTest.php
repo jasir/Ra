@@ -74,7 +74,7 @@ class RaControlTest extends \BaseTestCase
 			'renderMethod' => function () {
 				echo "Hello world";
 			},
-			'compontentFactory' => $this->componentFactory
+			/* 'compontentFactory' => $this->componentFactory */
 		]);
 
 		//$control = new SearchManagerControl($propsSearchManager)

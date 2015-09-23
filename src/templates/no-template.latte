@@ -1,0 +1,9 @@
+<div class="ra-control ra-stub" style="background:#fcc !important;color:#444 !important; font-size: 9px;">
+    <strong>NO TEMPLATE</strong>
+    This raControl named <code>{$control->name}</code>
+    {if $control->name !== $control->getUniqueId()}
+        (full path: <code>{$control->getUniqueId()}</code>) is configured.
+    {/if}
+
+    , please set <code>props.onRender()</code> or <code>props.templatePath</code> or <code>props.content</code>
+</div>
