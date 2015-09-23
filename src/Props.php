@@ -3,6 +3,8 @@
 namespace Ra;
 
 
+use Closure;
+
 class Props
 {
 	/** @var array */
@@ -67,7 +69,7 @@ class Props
 	 */
 	final public function get($name)
 	{
-		if ($this->hasProp($name)) {
+		if ($this->hasPrimitiveProp($name)) {
 			return $this->props[$name];
 		} elseif ($this->hasComputed($name)) {
 			return call_user_func($this->computed[$name], $this);
@@ -100,7 +102,7 @@ class Props
 			throw new PropsImmutableException('Props is in immutable mode.');
 		}
 
-		if ($this->hasAnyProp($name)) {
+		if ($this->hasProp($name)) {
 			throw new PropExistsException($name, $this->props, $this->computed);
 		}
 		$this->props[$name] = $value;
@@ -112,9 +114,9 @@ class Props
 	 * @param $name
 	 * @return bool
 	 */
-	final public function hasAnyProp($name)
+	final public function hasProp($name)
 	{
-		return $this->hasProp($name) || $this->hasComputed($name);
+		return $this->hasPrimitiveProp($name) || $this->hasComputed($name);
 	}
 
 
@@ -133,7 +135,7 @@ class Props
 	 */
 	final public function computed($name, $callable)
 	{
-		if ($this->hasAnyProp($name)) {
+		if ($this->hasProp($name)) {
 			throw new PropExistsException($name, $this->props, $this->computed);
 		}
 		$this->computed[$name] = $callable;
@@ -150,7 +152,7 @@ class Props
 		$props = (new self($newProperties));
 		foreach ($clonedPropertiesNames as $propName) {
 			if ($this->hasComputed($propName)) {
-				if ($props->hasAnyProp($propName)) {
+				if ($props->hasProp($propName)) {
 					throw new PropExistsException($propName, $props->props, $props->computed);
 				}
 				$props->computed($propName, $this->computed[$propName]);
@@ -179,7 +181,7 @@ class Props
 	 * @param $name
 	 * @return bool
 	 */
-	final protected function hasProp($name)
+	final protected function hasPrimitiveProp($name)
 	{
 		return array_key_exists($name, $this->props);
 	}
