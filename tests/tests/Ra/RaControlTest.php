@@ -10,7 +10,7 @@ class Dependency2
 	public $lorem = "Lorem ipsum...";
 }
 
-class SearchManagerControl extends BaseControl
+class SearchManagerControl extends RaControl
 {
 	/** @var Dependency1 @prop(name=dependency1)*/
 	public $dep;
@@ -18,18 +18,29 @@ class SearchManagerControl extends BaseControl
 	/** @var  Dependency2 @prop */
 	public $dependency2;
 
+
+	public function componentFactory($name)
+	{
+	}
+
+
 }
 
 
-class SearchFormControl extends BaseControl
+class SearchFormControl extends RaControl
 {
 	/** @var Dependency2 @prop */
 	private $dependency2;
 
+	public function getPrivateDependency()
+	{
+		return $this->dependency2;
+	}
+
 
 }
 
-class DescriptionFormControl extends BaseControl
+class DescriptionFormControl extends RaControl
 {
 
 }
@@ -63,13 +74,7 @@ class RaControlTest extends \BaseTestCase
 			'renderMethod' => function () {
 				echo "Hello world";
 			},
-			'compontentFactory' => function($name, $props	) {
-				switch($name) {
-					case 'search':
-						return new SearchFormControl($this->props);
-				}
-
-			}
+			'compontentFactory' => $this->componentFactory
 		]);
 
 		//$control = new SearchManagerControl($propsSearchManager)
@@ -87,9 +92,11 @@ class RaControlTest extends \BaseTestCase
 
 
 		$searchControl = new SearchManagerControl($propsSearchManager);
+		$searchControl['search'];
 
 		$this->assertSame($dependency1, $searchControl->dep);
-
 	}
+
+
 }
 
